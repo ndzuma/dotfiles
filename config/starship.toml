@@ -1,0 +1,122 @@
+# ---------- Global prompt layout ----------
+# Two-line prompt, minimal but with some flair
+add_newline = true
+
+# Order: first line with info, second line just the prompt symbol
+format = """
+$directory$git_branch$git_status$git_metrics$conda$nodejs$python$golang$java$rust$dart$deno$kotlin$php$ruby$swift$terraform$cmd_duration
+$character
+"""
+
+# ---------- Prompt symbol ----------
+[character]
+success_symbol = "[❯](bold blue)"
+error_symbol   = "[❯](bold red)"
+vicmd_symbol   = "[❮](bold blue)"
+
+# ---------- Directory ----------
+[directory]
+style = "cyan"
+truncation_length = 3
+truncate_to_repo = true
+format = "[$path]($style) "
+
+# ---------- Random -------------
+
+# ---------- Git: branch + status ----------
+[git_branch]
+format = "[• ](white)[$symbol$branch](bold purple) "
+symbol = " "
+style = "bold purple"
+
+[git_status]
+format = "([$all_status]($style) )"
+style = "yellow"
+conflicted = " "
+ahead      = "⇡${count}"
+behind     = "⇣${count}"
+diverged   = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked  = "${count}"
+stashed    = "${count}"
+modified   = "${count}"
+staged     = "${count}"
+renamed    = "${count}"
+deleted    = "${count}"
+
+[git_metrics]
+format = '([+$added]($added_style) )([-$deleted]($deleted_style) )'
+disabled = false
+
+# ---------- Command duration (for builds/tests) ----------
+[cmd_duration]
+min_time = 2000       # show only if last command > 2s
+format = "[• ](white)[ $duration]($style)"
+style = "bold yellow"
+
+# ---------- Conda: show only non-base env ----------
+[conda]
+symbol = '🅒 '
+style = "bold green"
+ignore_base = true    # hide when env is 'base'
+format = "[• ](white)[$symbol$environment]($style) "
+
+# ---------- Languages: icons + versions, only when relevant ----------
+[nodejs]
+symbol = " "
+format = "[• ](white)[$symbol($version)]($style) "
+style = "green"
+
+[python]
+symbol = " "
+format = "[• ](white)[$symbol($version)]($style) "
+style = "yellow"
+
+[golang]
+symbol = " "
+format = "[• ](white)[$symbol($version)]($style) "
+style = "cyan"
+
+[java]
+symbol = " "
+format = "[• ](white)[$symbol($version)]($style) "
+style = "red"
+
+[dart]
+symbol = " "
+format = "[• ](white)[$symbol$version]($style) "
+style = "blue"
+
+[deno]
+symbol = "🦕 "
+format = "[• ](white)[$symbol$version]($style) "
+style = "purple"
+
+[kotlin]
+symbol = "🅺 "
+format = "[• ](white)[$symbol$version]($style) "
+style = "orange"
+
+[rust]
+symbol = "🦀 "
+format = "[• ](white)[$symbol$version]($style) "
+style = "red"
+
+[php]
+symbol = "🄿 "
+format = "[• ](white)[$symbol$version]($style) "
+style = "indigo"
+
+[ruby]
+symbol = "💎 "
+format = "[• ](white)[$symbol$version]($style) "
+style = "red"
+
+[swift]
+symbol = "🐦 "
+format = "[• ](white)[$symbol$version]($style) "
+style = "purple"
+
+[terraform]
+symbol = "💧 "
+format = "[• ](white)[$symbol$version]($style) "
+style = "blue"
