@@ -53,11 +53,15 @@ esac
 # pnpm end
 export PATH="$HOME/go/bin:$PATH"
 
-# zsh-autosuggestions 
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# zsh-autocomplete 
-source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # macOS / Homebrew
+  [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  [ -f /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh ] && source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  # Linux (Pop!_OS / apt)
+  [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  [ -f /usr/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh ] && source /usr/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+fi
 
 # Keybinds for better completion
 bindkey '^ ' autosuggest-accept   # Right arrow or Ctrl+Space accepts suggestion
